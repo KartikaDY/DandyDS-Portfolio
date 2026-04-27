@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dandy DS — IT Support Specialist</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F7F4EF;
+      --ink: #1A1A18;
+      --ink-muted: #5A5A54;
+      --ink-faint: #9A9A92;
+      --accent: #3A87C8;
+      --accent-light: #E6F3FB;
+      --border: rgba(26,26,24,0.1);
+      --white: #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(247,244,239,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--ink-muted);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 7rem 6rem 4rem;
+      gap: 4rem;
+    }
+    .hero-content {}
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      color: var(--ink);
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--ink-muted);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-primary {
+      background: var(--ink);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--accent); }
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--ink); }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 360px;
+    }
+    .hero-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .hero-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+    .hero-card p { font-size: 0.875rem; color: var(--ink-muted); margin-bottom: 1.5rem; }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.75rem;
+      color: var(--ink);
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--ink-faint);
+      line-height: 1.4;
+    }
+
+    /* SECTION BASE */
+    section { padding: 6rem 6rem; }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+    .section-num {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--ink-faint);
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      color: var(--ink);
+    }
+
+    /* ABOUT */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--ink-muted);
+      margin-bottom: 1.25rem;
+      font-size: 1.025rem;
+      line-height: 1.85;
+    }
+    .about-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .highlight-item {
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      border-left: 3px solid var(--accent);
+    }
+    .highlight-item h4 {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+    .highlight-item p {
+      font-size: 0.825rem;
+      color: var(--ink-muted);
+      margin: 0;
+    }
+
+    /* SKILLS */
+    #skills { background: var(--cream); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .skill-group {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.75rem;
+    }
+    .skill-group-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--accent-light);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .skill-group-icon svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
+    .skill-group h3 {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      letter-spacing: 0.03em;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .skill-tag {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.75rem;
+      border-radius: 1rem;
+    }
+
+    /* CERTIFICATIONS */
+    .certs-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    .cert-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cert-card::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 60px; height: 60px;
+      background: var(--accent-light);
+      border-radius: 0 0 0 60px;
+    }
+    .cert-issuer {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .cert-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    .cert-year {
+      font-size: 0.75rem;
+      color: var(--ink-faint);
+      margin-top: 0.75rem;
+    }
+
+    /* EXPERIENCE */
+    #experience { background: var(--white); }
+    .exp-timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+    .exp-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+    .exp-item {
+      position: relative;
+      padding-bottom: 3rem;
+    }
+    .exp-item:last-child { padding-bottom: 0; }
+    .exp-dot {
+      position: absolute;
+      left: -2.375rem;
+      top: 0.4rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .exp-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .exp-company {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+    }
+    .exp-period {
+      font-size: 0.75rem;
+      color: var(--ink-faint);
+      background: var(--cream);
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+    }
+    .exp-role {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .exp-desc {
+      font-size: 0.925rem;
+      color: var(--ink-muted);
+      line-height: 1.75;
+    }
+    .exp-list {
+      list-style: none;
+      margin-top: 0.75rem;
+    }
+    .exp-list li {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      padding: 0.3rem 0;
+      display: flex;
+      gap: 0.75rem;
+    }
+    .exp-list li::before {
+      content: '—';
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* CONTACT */
+    #contact { background: var(--ink); }
+    #contact .section-title { color: var(--white); }
+    #contact .section-num { color: rgba(255,255,255,0.3); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-lead {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      color: var(--white);
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
+    .contact-lead em { color: var(--accent); font-style: italic; }
+    .contact-sub {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .contact-link:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--accent);
+    }
+    .contact-link-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(58,135,200,0.3);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-link-icon svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
+    .contact-link-label { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-bottom: 0.1rem; }
+    .contact-link-value { font-size: 0.9rem; color: var(--white); font-weight: 500; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* FADE IN ANIMATIONS */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.25rem; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
+      .hero-visual { display: none; }
+      section { padding: 4rem 2rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .certs-row { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .certs-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Dandy DS.</a>
+  <ul class="nav-links">
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#skills">Skill</a></li>
+    <li><a href="#experience">Pengalaman</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-eyebrow">IT Support Specialist</div>
+    <h1>Menjaga sistem <em>berjalan</em>, mendukung tim bekerja.</h1>
+    <p class="hero-desc">IT Support professional di RSU Bhakti Yudha, Depok. Berfokus pada infrastruktur jaringan, keamanan sistem, dan digitalisasi layanan kesehatan.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Hubungi Saya</a>
+      <a href="#experience" class="btn btn-outline">Lihat Pengalaman</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="hero-avatar">DS</div>
+      <h3>Dandy DS</h3>
+      <p>IT Support · RSU Bhakti Yudha<br>Depok, Jawa Barat</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">2+</div>
+          <div class="stat-label">Tahun di IT Support</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Sertifikasi diraih</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">S1</div>
+          <div class="stat-label">Teknik Informatika</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Tools dikuasai</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header fade-in">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Tentang Saya</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>Saya adalah IT Support Specialist yang bekerja di lingkungan rumah sakit — sebuah ekosistem yang membutuhkan keandalan sistem di atas segalanya. Berlatar belakang Teknik Informatika dan pengalaman di bidang admin accounting, saya memiliki perspektif unik dalam menjembatani kebutuhan teknis dan operasional.</p>
+      <p>Di RSU Bhakti Yudha, saya mengelola infrastruktur IT yang mendukung layanan klinis dan administratif sehari-hari, mulai dari troubleshooting hardware dan jaringan, hingga pemeliharaan sistem informasi rumah sakit (SIMRS).</p>
+      <p>Saya aktif mengembangkan diri melalui kursus dan sertifikasi, termasuk bidang AI, keamanan siber, dan healthcare IT, untuk terus relevan di era digitalisasi layanan kesehatan.</p>
+    </div>
+    <div class="about-highlights fade-in">
+      <div class="highlight-item">
+        <h4>Healthcare IT Environment</h4>
+        <p>Pengalaman mengelola sistem IT di lingkungan rumah sakit aktif dengan kebutuhan uptime tinggi.</p>
+      </div>
+      <div class="highlight-item">
+        <h4>Latar Belakang Multidisiplin</h4>
+        <p>Kombinasi keahlian Teknik Informatika dan pengalaman admin accounting untuk komunikasi efektif dengan manajemen.</p>
+      </div>
+      <div class="highlight-item">
+        <h4>Continuous Learning</h4>
+        <p>Aktif menyelesaikan kursus Google AI Essentials, IT Support, dan sertifikasi CompTIA di Coursera.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header fade-in">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Skill & Sertifikasi</h2>
+  </div>
+
+  <div class="skills-grid fade-in">
+    <div class="skill-group">
+      <div class="skill-group-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h3>Hardware & OS</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Windows OS</span>
+        <span class="skill-tag">Troubleshooting</span>
+        <span class="skill-tag">PC Assembly</span>
+        <span class="skill-tag">Printer / Peripheral</span>
+        <span class="skill-tag">Active Directory</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-icon">
+        <svg viewBox="0 0 24 24"><path d="M6 9V2l-3 3 3 3"/><path d="M18 15v7l3-3-3-3"/><path d="M2 12h20M2 12c0 5.5 4.5 10 10 10s10-4.5 10-10S17.5 2 12 2 2 6.5 2 12z"/></svg>
+      </div>
+      <h3>Jaringan</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">TCP/IP</span>
+        <span class="skill-tag">LAN / WAN</span>
+        <span class="skill-tag">Mikrotik</span>
+        <span class="skill-tag">WiFi Troubleshooting</span>
+        <span class="skill-tag">VLAN</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>Healthcare IT</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">SIMRS</span>
+        <span class="skill-tag">BPJS Integration</span>
+        <span class="skill-tag">HL7/FHIR (dasar)</span>
+        <span class="skill-tag">PERMENKES</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <h3>Soft Skills</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Komunikasi Teknis</span>
+        <span class="skill-tag">Problem Solving</span>
+        <span class="skill-tag">Manajemen Waktu</span>
+        <span class="skill-tag">Dokumentasi</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-icon">
+        <svg viewBox="0 0 24 24"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
+      </div>
+      <h3>Tools & Platform</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Google Workspace</span>
+        <span class="skill-tag">Microsoft 365</span>
+        <span class="skill-tag">TeamViewer</span>
+        <span class="skill-tag">NotebookLM</span>
+        <span class="skill-tag">Coursera</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3>AI & Produktivitas</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Google AI Essentials</span>
+        <span class="skill-tag">AI for Planning</span>
+        <span class="skill-tag">Prompt Engineering</span>
+        <span class="skill-tag">Generative AI</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CERTS -->
+  <div class="certs-row fade-in">
+    <div class="cert-card">
+      <div class="cert-issuer">Google / Coursera</div>
+      <div class="cert-name">Google AI Essentials</div>
+      <div class="cert-year">2025</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Google / Coursera</div>
+      <div class="cert-name">AI for Brainstorming & Planning</div>
+      <div class="cert-year">2025</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">CompTIA (Target)</div>
+      <div class="cert-name">CompTIA A+ · Network+</div>
+      <div class="cert-year">Roadmap 2025–2026</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">ITIL</div>
+      <div class="cert-name">ITIL Foundation</div>
+      <div class="cert-year">Roadmap 2026</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">Cisco</div>
+      <div class="cert-name">CCNA</div>
+      <div class="cert-year">Roadmap 2026</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-issuer">CompTIA</div>
+      <div class="cert-name">Security+</div>
+      <div class="cert-year">Roadmap 2026–2027</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header fade-in">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Pengalaman Kerja</h2>
+  </div>
+  <div class="exp-timeline fade-in">
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-meta">
+        <span class="exp-company">RSU Bhakti Yudha</span>
+        <span class="exp-period">2023 – Sekarang</span>
+      </div>
+      <div class="exp-role">IT Support Specialist</div>
+      <div class="exp-desc">Bertanggung jawab atas operasional dan pemeliharaan infrastruktur IT rumah sakit, memastikan sistem berjalan optimal untuk mendukung pelayanan medis dan administratif.</div>
+      <ul class="exp-list">
+        <li>Troubleshooting hardware, software, dan jaringan untuk seluruh unit rumah sakit</li>
+        <li>Pemeliharaan dan monitoring SIMRS (Sistem Informasi Manajemen Rumah Sakit)</li>
+        <li>Pengelolaan jaringan LAN/WiFi dan perangkat Mikrotik</li>
+        <li>Koordinasi dengan vendor dan tim medis terkait kebutuhan IT</li>
+        <li>Mendukung integrasi sistem BPJS Kesehatan</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-meta">
+        <span class="exp-company">Pengalaman Sebelumnya</span>
+        <span class="exp-period">Sebelum 2023</span>
+      </div>
+      <div class="exp-role">Admin Accounting</div>
+      <div class="exp-desc">Pengalaman di bidang administrasi dan akuntansi yang membentuk kemampuan analitis, ketelitian, dan kemampuan komunikasi lintas departemen — kini menjadi keunggulan dalam peran IT Support.</div>
+      <ul class="exp-list">
+        <li>Pengelolaan data keuangan dan laporan administratif</li>
+        <li>Koordinasi lintas divisi untuk kebutuhan operasional</li>
+        <li>Penggunaan perangkat lunak spreadsheet dan sistem ERP dasar</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header fade-in">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Kontak</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="fade-in">
+      <p class="contact-lead">Mari berkolaborasi dan <em>wujudkan</em> infrastruktur IT yang lebih baik.</p>
+      <p class="contact-sub">Saya terbuka untuk diskusi seputar IT Support, healthcare IT, maupun peluang kerja sama. Jangan ragu untuk menghubungi saya.</p>
+    </div>
+    <div class="contact-links fade-in">
+      <a href="mailto:dandyds@email.com" class="contact-link">
+        <div class="contact-link-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-value">dandyds@email.com</div>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/dandyds" class="contact-link" target="_blank">
+        <div class="contact-link-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div>
+          <div class="contact-link-label">LinkedIn</div>
+          <div class="contact-link-value">linkedin.com/in/dandyds</div>
+        </div>
+      </a>
+      <a href="#" class="contact-link">
+        <div class="contact-link-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="contact-link-label">Lokasi</div>
+          <div class="contact-link-value">Depok, Jawa Barat</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Dandy DS · IT Support Specialist · RSU Bhakti Yudha, Depok</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
