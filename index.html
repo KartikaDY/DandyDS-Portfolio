@@ -3,791 +3,1275 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dandy DS — IT Support Specialist</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <title>Dandy Dwi Septiadi — IT Support Specialist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream: #F7F4EF;
-      --ink: #1A1A18;
-      --ink-muted: #5A5A54;
-      --ink-faint: #9A9A92;
-      --accent: #3A87C8;
-      --accent-light: #E6F3FB;
-      --border: rgba(26,26,24,0.1);
+      --bg: #0B0E14;
+      --bg2: #111520;
+      --bg3: #161B27;
+      --card: #1A1F2E;
+      --border: rgba(255,255,255,0.07);
+      --blue: #5AB4FF;
+      --blue2: #3A8BE8;
+      --blue-glow: rgba(90,180,255,0.15);
+      --blue-glow2: rgba(90,180,255,0.06);
       --white: #FFFFFF;
+      --muted: #8892A4;
+      --faint: #4A5568;
+      --sidebar: 280px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--cream);
-      color: var(--ink);
-      font-size: 16px;
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      font-size: 15px;
       line-height: 1.7;
       overflow-x: hidden;
     }
 
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.25rem 2rem;
+    /* ── LAYOUT ── */
+    .layout {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(247,244,239,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.2rem;
-      color: var(--ink);
-      text-decoration: none;
-    }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      font-size: 0.875rem;
-      color: var(--ink-muted);
-      text-decoration: none;
-      letter-spacing: 0.03em;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
-
-    /* HERO */
-    .hero {
       min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 7rem 6rem 4rem;
-      gap: 4rem;
     }
-    .hero-content {}
-    .hero-eyebrow {
-      font-size: 0.75rem;
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar);
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      display: flex;
+      flex-direction: column;
+      z-index: 50;
+      overflow: hidden;
+    }
+
+    .sidebar::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: -100px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(90,180,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .sidebar-profile {
+      padding: 2.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.25rem;
+    }
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue2), #1A4B8A);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--white);
+      position: relative;
+      z-index: 1;
+    }
+    .avatar-ring {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid var(--blue);
+      opacity: 0.5;
+      animation: pulse-ring 3s ease-in-out infinite;
+    }
+    @keyframes pulse-ring {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.06); opacity: 0.2; }
+    }
+    .available-badge {
+      position: absolute;
+      bottom: 4px; right: 4px;
+      width: 14px; height: 14px;
+      background: #22C55E;
+      border-radius: 50%;
+      border: 2px solid var(--bg2);
+      z-index: 2;
+    }
+
+    .sidebar-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .sidebar-role {
+      font-size: 0.775rem;
+      color: var(--blue);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       font-weight: 500;
+      background: var(--blue-glow2);
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      border: 1px solid rgba(90,180,255,0.2);
+      display: inline-block;
+    }
+
+    /* NAV */
+    .sidebar-nav {
+      padding: 1.5rem 1.25rem;
+      flex: 1;
+    }
+    .nav-label {
+      font-size: 0.65rem;
+      font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
+      color: var(--faint);
+      padding: 0 0.75rem;
+      margin-bottom: 0.5rem;
+      margin-top: 1.25rem;
+    }
+    .nav-label:first-child { margin-top: 0; }
+
+    .nav-item {
       display: flex;
       align-items: center;
       gap: 0.75rem;
-    }
-    .hero-eyebrow::after {
-      content: '';
-      display: block;
-      width: 2rem;
-      height: 1px;
-      background: var(--accent);
-    }
-    .hero h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      color: var(--ink);
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .hero-desc {
-      font-size: 1.05rem;
-      color: var(--ink-muted);
-      max-width: 480px;
-      margin-bottom: 2.5rem;
-      line-height: 1.8;
-    }
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 1.75rem;
-      font-size: 0.875rem;
-      font-weight: 500;
+      padding: 0.65rem 0.75rem;
+      border-radius: 8px;
+      color: var(--muted);
       text-decoration: none;
-      border-radius: 2px;
+      font-size: 0.9rem;
+      font-weight: 400;
       transition: all 0.2s;
       cursor: pointer;
-      border: none;
-      font-family: 'DM Sans', sans-serif;
+      border: 1px solid transparent;
+      position: relative;
+      margin-bottom: 2px;
     }
-    .btn-primary {
-      background: var(--ink);
+    .nav-item:hover, .nav-item.active {
       color: var(--white);
+      background: var(--blue-glow2);
+      border-color: rgba(90,180,255,0.15);
     }
-    .btn-primary:hover { background: var(--accent); }
-    .btn-outline {
-      background: transparent;
-      color: var(--ink);
-      border: 1px solid var(--border);
+    .nav-item.active { color: var(--blue); }
+    .nav-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 20%; bottom: 20%;
+      width: 3px;
+      background: var(--blue);
+      border-radius: 0 2px 2px 0;
     }
-    .btn-outline:hover { border-color: var(--ink); }
+    .nav-icon { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.7; }
+    .nav-item.active .nav-icon, .nav-item:hover .nav-icon { opacity: 1; }
 
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .hero-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2.5rem;
-      width: 100%;
-      max-width: 360px;
-    }
-    .hero-avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: var(--accent-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.5rem;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-    }
-    .hero-card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.2rem;
-      margin-bottom: 0.25rem;
-    }
-    .hero-card p { font-size: 0.875rem; color: var(--ink-muted); margin-bottom: 1.5rem; }
-    .hero-stats {
+    /* SIDEBAR STATS */
+    .sidebar-stats {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--border);
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
-      border-top: 1px solid var(--border);
-      padding-top: 1.5rem;
     }
-    .stat-item {}
-    .stat-num {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.75rem;
-      color: var(--ink);
+    .s-stat { text-align: center; }
+    .s-stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--blue);
+      display: block;
     }
-    .stat-label {
-      font-size: 0.75rem;
-      color: var(--ink-faint);
-      line-height: 1.4;
+    .s-stat-label { font-size: 0.7rem; color: var(--faint); line-height: 1.3; }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      margin-left: var(--sidebar);
+      flex: 1;
+      min-height: 100vh;
     }
 
-    /* SECTION BASE */
-    section { padding: 6rem 6rem; }
-    .section-header {
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
       display: flex;
-      align-items: baseline;
-      gap: 1.5rem;
-      margin-bottom: 3.5rem;
+      align-items: center;
+      padding: 5rem 4rem;
+      position: relative;
+      overflow: hidden;
     }
-    .section-num {
-      font-size: 0.75rem;
+    #home::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(90,180,255,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    #home::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: 30%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(58,139,232,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-inner { position: relative; z-index: 1; max-width: 700px; }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.775rem;
       font-weight: 500;
       letter-spacing: 0.1em;
-      color: var(--ink-faint);
+      text-transform: uppercase;
+      color: var(--blue);
+      background: var(--blue-glow2);
+      border: 1px solid rgba(90,180,255,0.2);
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
     }
-    .section-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
-      color: var(--ink);
+    .hero-tag-dot {
+      width: 6px; height: 6px;
+      background: var(--blue);
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 .line2 {
+      display: block;
+      background: linear-gradient(90deg, var(--blue), #A0D4FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    /* ABOUT */
-    #about { background: var(--white); }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      line-height: 1.85;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.75rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+      letter-spacing: 0.02em;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: #0B0E14;
+      box-shadow: 0 0 24px rgba(90,180,255,0.3);
+    }
+    .btn-primary:hover {
+      background: #7EC9FF;
+      box-shadow: 0 0 32px rgba(90,180,255,0.5);
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: var(--blue-glow2);
+    }
+
+    /* TECH STACK PILLS */
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    .tech-label { font-size: 0.75rem; color: var(--faint); margin-right: 0.25rem; }
+    .tech-pill {
+      font-size: 0.75rem;
+      color: var(--muted);
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .tech-pill:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    /* ── SECTION BASE ── */
+    .section {
+      padding: 5rem 4rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .sec-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .sec-num {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .sec-line {
+      flex: 0 0 2rem;
+      height: 1px;
+      background: var(--blue);
+      opacity: 0.5;
+    }
+
+    .sec-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+    }
+    .sec-title span {
+      background: linear-gradient(90deg, var(--blue), #A0D4FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg2); }
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 5rem;
+      gap: 4rem;
       align-items: start;
     }
     .about-text p {
-      color: var(--ink-muted);
+      color: var(--muted);
       margin-bottom: 1.25rem;
-      font-size: 1.025rem;
-      line-height: 1.85;
+      font-size: 0.975rem;
+      line-height: 1.9;
     }
-    .about-highlights {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-    .highlight-item {
-      padding: 1.25rem 1.5rem;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      border-left: 3px solid var(--accent);
-    }
-    .highlight-item h4 {
-      font-size: 0.875rem;
-      font-weight: 500;
-      margin-bottom: 0.25rem;
-    }
-    .highlight-item p {
-      font-size: 0.825rem;
-      color: var(--ink-muted);
-      margin: 0;
-    }
-
-    /* SKILLS */
-    #skills { background: var(--cream); }
-    .skills-grid {
+    .about-info {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      gap: 0.75rem;
+      margin-top: 2rem;
     }
-    .skill-group {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1.75rem;
-    }
-    .skill-group-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--accent-light);
-      border-radius: 2px;
+    .info-row {
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
-    .skill-group-icon svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
-    .skill-group h3 {
-      font-size: 0.875rem;
-      font-weight: 500;
-      margin-bottom: 1rem;
-      letter-spacing: 0.03em;
-    }
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    .skill-tag {
-      font-size: 0.75rem;
-      color: var(--ink-muted);
-      background: var(--cream);
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      background: var(--card);
+      border-radius: 8px;
       border: 1px solid var(--border);
-      padding: 0.3rem 0.75rem;
-      border-radius: 1rem;
+      font-size: 0.875rem;
+    }
+    .info-row-label {
+      color: var(--faint);
+      min-width: 90px;
+      font-size: 0.775rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .info-row-val { color: var(--white); font-weight: 500; }
+
+    /* ABOUT RIGHT - Feature cards */
+    .feature-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .feat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feat-card:hover {
+      border-color: rgba(90,180,255,0.3);
+      transform: translateX(4px);
+    }
+    .feat-icon {
+      width: 44px; height: 44px;
+      background: var(--blue-glow);
+      border: 1px solid rgba(90,180,255,0.2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .feat-icon svg { width: 20px; height: 20px; stroke: var(--blue); fill: none; stroke-width: 1.5; }
+    .feat-card h4 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .feat-card p { font-size: 0.825rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── SKILLS ── */
+    #skills {}
+    .skills-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
     }
 
-    /* CERTIFICATIONS */
-    .certs-row {
+    .skill-category {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      transition: border-color 0.2s;
+    }
+    .skill-category:hover { border-color: rgba(90,180,255,0.25); }
+    .skill-cat-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .skill-cat-icon {
+      width: 36px; height: 36px;
+      background: var(--blue-glow);
+      border: 1px solid rgba(90,180,255,0.2);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .skill-cat-icon svg { width: 17px; height: 17px; stroke: var(--blue); fill: none; stroke-width: 1.5; }
+    .skill-cat-title { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; }
+
+    .skill-bars { display: flex; flex-direction: column; gap: 0.85rem; }
+    .skill-row {}
+    .skill-row-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 0.4rem;
+    }
+    .skill-name { font-size: 0.825rem; color: var(--muted); }
+    .skill-pct { font-size: 0.75rem; color: var(--blue); font-weight: 500; }
+    .skill-bar-bg {
+      height: 5px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue2), var(--blue));
+      border-radius: 100px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .skill-bar-fill.animated { transform: scaleX(1); }
+
+    /* CERTS */
+    .certs-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
+      gap: 1rem;
       margin-top: 3rem;
     }
     .cert-card {
-      background: var(--white);
+      background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: 12px;
       padding: 1.5rem;
+      transition: all 0.2s;
       position: relative;
       overflow: hidden;
     }
     .cert-card::after {
       content: '';
       position: absolute;
-      top: 0; right: 0;
-      width: 60px; height: 60px;
-      background: var(--accent-light);
-      border-radius: 0 0 0 60px;
+      inset: 0;
+      background: radial-gradient(circle at top right, var(--blue-glow2), transparent 60%);
+      pointer-events: none;
     }
-    .cert-issuer {
-      font-size: 0.7rem;
-      font-weight: 500;
+    .cert-card:hover {
+      border-color: rgba(90,180,255,0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+    .cert-badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
+      color: var(--blue);
+      background: var(--blue-glow);
+      border: 1px solid rgba(90,180,255,0.2);
+      padding: 0.25rem 0.65rem;
+      border-radius: 100px;
+      margin-bottom: 0.85rem;
+      display: inline-block;
     }
     .cert-name {
+      font-family: 'Syne', sans-serif;
       font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--ink);
+      font-weight: 700;
+      color: var(--white);
       line-height: 1.4;
+      margin-bottom: 0.5rem;
     }
-    .cert-year {
-      font-size: 0.75rem;
-      color: var(--ink-faint);
-      margin-top: 0.75rem;
-    }
+    .cert-year { font-size: 0.75rem; color: var(--faint); }
 
-    /* EXPERIENCE */
-    #experience { background: var(--white); }
-    .exp-timeline {
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg2); }
+
+    .exp-grid { display: grid; gap: 1.5rem; }
+    .exp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.75rem;
+      transition: all 0.2s;
       position: relative;
-      padding-left: 2rem;
+      overflow: hidden;
     }
-    .exp-timeline::before {
+    .exp-card::before {
       content: '';
       position: absolute;
-      left: 0;
-      top: 8px;
-      bottom: 0;
-      width: 1px;
-      background: var(--border);
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--blue), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
     }
-    .exp-item {
-      position: relative;
-      padding-bottom: 3rem;
-    }
-    .exp-item:last-child { padding-bottom: 0; }
-    .exp-dot {
-      position: absolute;
-      left: -2.375rem;
-      top: 0.4rem;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      border: 2px solid var(--white);
-      box-shadow: 0 0 0 2px var(--accent);
-    }
-    .exp-meta {
+    .exp-card:hover { border-color: rgba(90,180,255,0.25); }
+    .exp-card:hover::before { opacity: 1; }
+
+    .exp-year-col {
       display: flex;
-      align-items: baseline;
-      gap: 1rem;
+      flex-direction: column;
+      align-items: center;
+      min-width: 70px;
+    }
+    .exp-year-badge {
+      background: var(--blue-glow);
+      border: 1px solid rgba(90,180,255,0.2);
+      color: var(--blue);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+    .exp-year-line {
+      flex: 1;
+      width: 1px;
+      background: linear-gradient(180deg, var(--border), transparent);
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
       margin-bottom: 0.75rem;
       flex-wrap: wrap;
+      gap: 0.5rem;
     }
     .exp-company {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
     }
     .exp-period {
       font-size: 0.75rem;
-      color: var(--ink-faint);
-      background: var(--cream);
-      padding: 0.25rem 0.75rem;
-      border-radius: 1rem;
+      color: var(--faint);
+      background: var(--bg3);
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
     }
     .exp-role {
-      font-size: 0.875rem;
+      font-size: 0.825rem;
+      color: var(--blue);
       font-weight: 500;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.03em;
     }
-    .exp-desc {
-      font-size: 0.925rem;
-      color: var(--ink-muted);
-      line-height: 1.75;
-    }
-    .exp-list {
-      list-style: none;
-      margin-top: 0.75rem;
-    }
+    .exp-list { list-style: none; }
     .exp-list li {
-      font-size: 0.9rem;
-      color: var(--ink-muted);
+      font-size: 0.875rem;
+      color: var(--muted);
       padding: 0.3rem 0;
       display: flex;
       gap: 0.75rem;
+      line-height: 1.6;
     }
     .exp-list li::before {
-      content: '—';
-      color: var(--accent);
+      content: '›';
+      color: var(--blue);
+      font-size: 1.1rem;
+      line-height: 1.4;
       flex-shrink: 0;
     }
 
-    /* CONTACT */
-    #contact { background: var(--ink); }
-    #contact .section-title { color: var(--white); }
-    #contact .section-num { color: rgba(255,255,255,0.3); }
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute;
+      bottom: -200px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(90,180,255,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 5rem;
       align-items: start;
     }
-    .contact-lead {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
-      color: var(--white);
-      line-height: 1.4;
-      margin-bottom: 1.5rem;
+    .contact-headline {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
     }
-    .contact-lead em { color: var(--accent); font-style: italic; }
+    .contact-headline span {
+      background: linear-gradient(90deg, var(--blue), #A0D4FF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .contact-sub {
-      color: rgba(255,255,255,0.5);
+      color: var(--muted);
       font-size: 0.95rem;
       line-height: 1.8;
+      margin-bottom: 2rem;
     }
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .contact-link {
+    .contact-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-card {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.25rem;
       padding: 1.25rem 1.5rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 4px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
       text-decoration: none;
       transition: all 0.2s;
     }
-    .contact-link:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: var(--accent);
+    .contact-card:hover {
+      border-color: rgba(90,180,255,0.3);
+      transform: translateX(4px);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
     }
-    .contact-link-icon {
-      width: 36px;
-      height: 36px;
-      background: rgba(58,135,200,0.3);
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .cc-icon {
+      width: 44px; height: 44px;
+      background: var(--blue-glow);
+      border: 1px solid rgba(90,180,255,0.2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
     }
-    .contact-link-icon svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
-    .contact-link-label { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-bottom: 0.1rem; }
-    .contact-link-value { font-size: 0.9rem; color: var(--white); font-weight: 500; }
+    .cc-icon svg { width: 18px; height: 18px; stroke: var(--blue); fill: none; stroke-width: 1.5; }
+    .cc-label { font-size: 0.725rem; color: var(--faint); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.1rem; }
+    .cc-value { font-size: 0.9rem; color: var(--white); font-weight: 500; }
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer {
-      text-align: center;
-      padding: 2rem;
-      background: var(--ink);
-      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 1.5rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-size: 0.8rem;
-      color: rgba(255,255,255,0.3);
+      color: var(--faint);
     }
+    footer span { color: var(--blue); }
 
-    /* FADE IN ANIMATIONS */
-    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-in.visible { opacity: 1; transform: none; }
+    /* ── MOBILE NAV ── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      z-index: 100;
+      padding: 0.75rem 0;
+    }
+    .mobile-nav-inner {
+      display: flex;
+      justify-content: space-around;
+    }
+    .mob-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--faint);
+      text-decoration: none;
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .mob-nav-item svg { width: 20px; height: 20px; }
+    .mob-nav-item:hover, .mob-nav-item.active { color: var(--blue); }
+
+    /* ANIMATIONS */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
 
     /* RESPONSIVE */
-    @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1.25rem; }
-      .hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
-      .hero-visual { display: none; }
-      section { padding: 4rem 2rem; }
-      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .skills-grid { grid-template-columns: 1fr 1fr; }
-      .certs-row { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 1024px) {
+      :root { --sidebar: 240px; }
+      .section { padding: 4rem 2.5rem; }
+      #home { padding: 5rem 2.5rem; }
     }
-    @media (max-width: 600px) {
-      .skills-grid { grid-template-columns: 1fr; }
-      .certs-row { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .mobile-nav { display: block; }
+      .section { padding: 3.5rem 1.5rem 5rem; }
+      #home { padding: 4rem 1.5rem 5rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .skills-layout { grid-template-columns: 1fr; }
+      .certs-grid { grid-template-columns: 1fr 1fr; }
+      .exp-card { grid-template-columns: 1fr; }
+      .exp-year-col { flex-direction: row; align-items: center; }
+      .exp-year-line { display: none; }
+      footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .certs-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">Dandy DS.</a>
-  <ul class="nav-links">
-    <li><a href="#about">Tentang</a></li>
-    <li><a href="#skills">Skill</a></li>
-    <li><a href="#experience">Pengalaman</a></li>
-    <li><a href="#contact">Kontak</a></li>
-  </ul>
+<div class="layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="sidebar-profile">
+      <div class="avatar-wrap">
+        <div class="avatar">DS</div>
+        <div class="avatar-ring"></div>
+        <div class="available-badge" title="Available for opportunities"></div>
+      </div>
+      <div class="sidebar-name">Dandy Dwi Septiadi</div>
+      <div class="sidebar-role">IT Support Specialist</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-label">Menu</div>
+      <a href="#home" class="nav-item active" onclick="setActive(this)">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Beranda
+      </a>
+      <a href="#about" class="nav-item" onclick="setActive(this)">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Tentang Saya
+      </a>
+      <a href="#skills" class="nav-item" onclick="setActive(this)">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        Skill & Sertifikasi
+      </a>
+      <a href="#experience" class="nav-item" onclick="setActive(this)">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Pengalaman
+      </a>
+      <a href="#contact" class="nav-item" onclick="setActive(this)">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Kontak
+      </a>
+    </nav>
+
+    <div class="sidebar-stats">
+      <div class="s-stat">
+        <span class="s-stat-num">2+</span>
+        <span class="s-stat-label">Tahun Pengalaman</span>
+      </div>
+      <div class="s-stat">
+        <span class="s-stat-num">5+</span>
+        <span class="s-stat-label">Sertifikasi</span>
+      </div>
+      <div class="s-stat">
+        <span class="s-stat-num">S1</span>
+        <span class="s-stat-label">Teknik Informatika</span>
+      </div>
+      <div class="s-stat">
+        <span class="s-stat-num">10+</span>
+        <span class="s-stat-label">Tools Dikuasai</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- HERO -->
+    <section id="home">
+      <div class="hero-inner">
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          Tersedia untuk Peluang Baru
+        </div>
+        <h1>
+          IT Support untuk<br>
+          <span class="line2">Infrastruktur Modern</span>
+        </h1>
+        <p class="hero-desc">
+          IT Support Specialist di RSU Bhakti Yudha, Depok. Memastikan sistem berjalan, jaringan andal, dan tim bisa bekerja tanpa hambatan — dengan pengalaman di lingkungan healthcare yang menuntut keandalan tinggi.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Hubungi Saya
+          </a>
+          <a href="#experience" class="btn btn-outline">Lihat Pengalaman</a>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-label">Tools:</span>
+          <span class="tech-pill">Mikrotik</span>
+          <span class="tech-pill">SIMRS</span>
+          <span class="tech-pill">Windows Server</span>
+          <span class="tech-pill">Active Directory</span>
+          <span class="tech-pill">Google Workspace</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="sec-eyebrow fade-up">
+        <span class="sec-num">01</span>
+        <span class="sec-line"></span>
+      </div>
+      <h2 class="sec-title fade-up">Tentang <span>Saya</span></h2>
+      <div class="about-grid">
+        <div class="fade-up">
+          <p>Saya adalah IT Support Specialist yang bekerja di lingkungan rumah sakit — ekosistem yang membutuhkan keandalan sistem di atas segalanya. Berlatar belakang Teknik Informatika dan pengalaman sebagai admin accounting, saya memiliki perspektif unik dalam menjembatani kebutuhan teknis dan operasional.</p>
+          <p>Di RSU Bhakti Yudha, saya mengelola infrastruktur IT yang mendukung layanan klinis dan administratif, mulai dari troubleshooting hardware dan jaringan hingga pemeliharaan sistem informasi rumah sakit (SIMRS).</p>
+          <p>Saya aktif mengembangkan diri melalui kursus dan sertifikasi di bidang AI, keamanan siber, dan healthcare IT untuk terus relevan di era digitalisasi layanan kesehatan.</p>
+          <div class="about-info">
+            <div class="info-row">
+              <span class="info-row-label">Nama</span>
+              <span class="info-row-val">Dandy Dwi Septiadi</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">Posisi</span>
+              <span class="info-row-val">IT Support Specialist</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">Tempat Kerja</span>
+              <span class="info-row-val">RSU Bhakti Yudha, Depok</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">Pendidikan</span>
+              <span class="info-row-val">S1 Teknik Informatika</span>
+            </div>
+            <div class="info-row">
+              <span class="info-row-label">Lokasi</span>
+              <span class="info-row-val">Sawangan Baru, Depok - Jawa Barat</span>
+            </div>
+          </div>
+        </div>
+        <div class="feature-cards fade-up">
+          <div class="feat-card">
+            <div class="feat-icon">
+              <svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/><path d="M3 21h18"/><path d="M9 10h6"/><path d="M9 14h6"/><rect x="9" y="17" width="6" height="4" rx="0"/></svg>
+            </div>
+            <div>
+              <h4>Healthcare IT Environment</h4>
+              <p>Pengalaman mengelola sistem IT di lingkungan rumah sakit aktif dengan kebutuhan uptime tinggi 24/7.</p>
+            </div>
+          </div>
+          <div class="feat-card">
+            <div class="feat-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            </div>
+            <div>
+              <h4>Latar Belakang Multidisiplin</h4>
+              <p>Kombinasi IT dan accounting untuk komunikasi efektif lintas departemen teknis dan manajerial.</p>
+            </div>
+          </div>
+          <div class="feat-card">
+            <div class="feat-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div>
+              <h4>Continuous Learning</h4>
+              <p>Aktif menyelesaikan kursus Google AI Essentials dan pada jalur sertifikasi CompTIA A+, Network+.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section">
+      <div class="sec-eyebrow fade-up">
+        <span class="sec-num">02</span>
+        <span class="sec-line"></span>
+      </div>
+      <h2 class="sec-title fade-up">Skill & <span>Sertifikasi</span></h2>
+
+      <div class="skills-layout fade-up">
+        <div class="skill-category">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">
+              <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <span class="skill-cat-title">Hardware & OS</span>
+          </div>
+          <div class="skill-bars">
+            <div class="skill-row">
+              <div class="skill-row-top"><span class="skill-name">Windows Troubleshooting</span><span class="skill-pct">90%</span></div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.90"></div></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-row-top"><span class="skill-name">PC Assembly & Repair</span><span class="skill-pct">85%</span></div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.85"></div></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-row-top"><span class="skill-name">Active Directory</span><span class="skill-pct">75%</span></div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.75"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">
+              <svg viewBox="0 0 24 24"><path d="M6 9V2l-3 3 3 3"/><path d="M18 15v7l3-3-3-3"/><path d="M2 12h20"/></svg>
+            </div>
+            <span class="skill-cat-title">Jaringan</span>
+          </div>
+          <div class="skill-bars">
+            <div class="skill-row">
+              <div class="skill-row-top"><span class="skill-name">TCP/IP & LAN/WAN</span><span class="skill-pct">85%</span></div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.85"></div></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-row-top"><span class="skill-name">Mikrotik RouterOS</span><span class="skill-pct">78%</span></div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.78"></div></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-row-top"><span class="skill-name">WiFi & VLAN</span><span class="skill-pct">70%</span></div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.70"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <span class="skill-cat-title">Healthcare IT</span>
+          </div>
+          <div class="skill-bars">
+            <div class="skill-row">
+              <div class="skill-row-top"><span class="skill-name">SIMRS</span><span class="skill-pct">88%</span></div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.88"></div></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-row-top"><span class="skill-name">BPJS Integration</span><span class="skill-pct">80%</span></div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.80"></div></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-row-top"><span class="skill-name">HL7/FHIR Dasar</span><span class="skill-pct">55%</span></div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.55"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">
+              <svg viewBox="0 0 24 24"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/></svg>
+            </div>
+            <span class="skill-cat-title">AI & Produktivitas</span>
+          </div>
+          <div class="skill-bars">
+            <div class="skill-row">
+              <div class="skill-row-top"><span class="skill-name">Google AI Essentials</span><span class="skill-pct">82%</span></div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.82"></div></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-row-top"><span class="skill-name">Prompt Engineering</span><span class="skill-pct">75%</span></div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.75"></div></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-row-top"><span class="skill-name">Google Workspace</span><span class="skill-pct">88%</span></div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.88"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CERTS -->
+      <div class="certs-grid fade-up">
+        <div class="cert-card">
+          <div class="cert-badge">Google · Coursera</div>
+          <div class="cert-name">Google AI Essentials</div>
+          <div class="cert-year">✓ Selesai · 2025</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">Google · Coursera</div>
+          <div class="cert-name">AI for Brainstorming & Planning</div>
+          <div class="cert-year">✓ Selesai · 2025</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">CompTIA</div>
+          <div class="cert-name">CompTIA A+ & Network+</div>
+          <div class="cert-year">→ Target 2025–2026</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">ITIL</div>
+          <div class="cert-name">ITIL Foundation v4</div>
+          <div class="cert-year">→ Target 2026</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">Cisco</div>
+          <div class="cert-name">CCNA</div>
+          <div class="cert-year">→ Target 2026</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">CompTIA</div>
+          <div class="cert-name">Security+</div>
+          <div class="cert-year">→ Target 2026–2027</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <div class="sec-eyebrow fade-up">
+        <span class="sec-num">03</span>
+        <span class="sec-line"></span>
+      </div>
+      <h2 class="sec-title fade-up">Pengalaman <span>Kerja</span></h2>
+
+      <div class="exp-grid fade-up">
+        <div class="exp-card">
+          <div class="exp-year-col">
+            <div class="exp-year-badge">2026<br>– Sekarang</div>
+            <div class="exp-year-line"></div>
+          </div>
+          <div>
+            <div class="exp-header">
+              <span class="exp-company">RSU Bhakti Yudha</span>
+              <span class="exp-period">2026 – Sekarang · Depok</span>
+            </div>
+            <div class="exp-role">IT Support Specialist</div>
+            <ul class="exp-list">
+              <li>Troubleshooting hardware, software, dan jaringan untuk seluruh unit rumah sakit</li>
+              <li>Pemeliharaan dan monitoring SIMRS (Sistem Informasi Manajemen Rumah Sakit)</li>
+              <li>Pengelolaan jaringan LAN/WiFi dan perangkat Mikrotik RouterOS</li>
+              <li>Koordinasi dengan vendor dan tim medis terkait kebutuhan IT</li>
+              <li>Mendukung integrasi sistem BPJS Kesehatan dan digitalisasi layanan</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-year-col">
+            <div class="exp-year-badge">2023<br>– 2026</div>
+            <div class="exp-year-line"></div>
+          </div>
+          <div>
+            <div class="exp-header">
+              <span class="exp-company">Pengalaman Sebelumnya</span>
+              <span class="exp-period">2023 – 2026</span>
+            </div>
+            <div class="exp-role">Admin Accounting</div>
+            <ul class="exp-list">
+              <li>Pengelolaan data keuangan dan laporan administratif bulanan</li>
+              <li>Koordinasi lintas divisi untuk kebutuhan operasional dan pengadaan</li>
+              <li>Penggunaan perangkat lunak spreadsheet dan sistem ERP dasar</li>
+              <li>Membentuk kemampuan analitis dan komunikasi lintas departemen</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="sec-eyebrow fade-up">
+        <span class="sec-num">04</span>
+        <span class="sec-line"></span>
+      </div>
+      <h2 class="sec-title fade-up">Mari <span>Terhubung</span></h2>
+      <div class="contact-grid">
+        <div class="fade-up">
+          <p class="contact-headline">Siap berkolaborasi untuk infrastruktur IT yang lebih <span>andal</span>.</p>
+          <p class="contact-sub">Saya terbuka untuk diskusi seputar IT Support, healthcare IT, peluang karier baru, maupun kolaborasi proyek. Jangan ragu untuk menghubungi saya.</p>
+          <a href="#contact" class="btn btn-primary" style="display:inline-flex">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Kirim Pesan
+          </a>
+        </div>
+        <div class="contact-cards fade-up">
+          <a href="mailto:dandyds@email.com" class="contact-card">
+            <div class="cc-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="cc-label">Email</div>
+              <div class="cc-value">dandyds26@email.com</div>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/dandyds" class="contact-card" target="_blank">
+            <div class="cc-icon">
+              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div>
+              <div class="cc-label">LinkedIn</div>
+              <div class="cc-value">linkedin.com/in/dandyds</div>
+            </div>
+          </a>
+          <div class="contact-card">
+            <div class="cc-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="cc-label">Lokasi</div>
+              <div class="cc-value">Sawangan Baru, Depok, Jawa Barat, Indonesia</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 <span>Dandy Dwi Septiadi</span> · IT Support Specialist</span>
+      <span>RSU Bhakti Yudha, Depok</span>
+    </footer>
+
+  </main>
+</div>
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <a href="#home" class="mob-nav-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      Home
+    </a>
+    <a href="#about" class="mob-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Tentang
+    </a>
+    <a href="#skills" class="mob-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      Skill
+    </a>
+    <a href="#experience" class="mob-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      Kerja
+    </a>
+    <a href="#contact" class="mob-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Kontak
+    </a>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-content">
-    <div class="hero-eyebrow">IT Support Specialist</div>
-    <h1>Menjaga sistem <em>berjalan</em>, mendukung tim bekerja.</h1>
-    <p class="hero-desc">IT Support professional di RSU Bhakti Yudha, Depok. Berfokus pada infrastruktur jaringan, keamanan sistem, dan digitalisasi layanan kesehatan.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn btn-primary">Hubungi Saya</a>
-      <a href="#experience" class="btn btn-outline">Lihat Pengalaman</a>
-    </div>
-  </div>
-  <div class="hero-visual">
-    <div class="hero-card">
-      <div class="hero-avatar">DS</div>
-      <h3>Dandy DS</h3>
-      <p>IT Support · RSU Bhakti Yudha<br>Depok, Jawa Barat</p>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-num">2+</div>
-          <div class="stat-label">Tahun di IT Support</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">5+</div>
-          <div class="stat-label">Sertifikasi diraih</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">S1</div>
-          <div class="stat-label">Teknik Informatika</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">10+</div>
-          <div class="stat-label">Tools dikuasai</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-header fade-in">
-    <span class="section-num">01</span>
-    <h2 class="section-title">Tentang Saya</h2>
-  </div>
-  <div class="about-grid">
-    <div class="about-text fade-in">
-      <p>Saya adalah IT Support Specialist yang bekerja di lingkungan rumah sakit — sebuah ekosistem yang membutuhkan keandalan sistem di atas segalanya. Berlatar belakang Teknik Informatika dan pengalaman di bidang admin accounting, saya memiliki perspektif unik dalam menjembatani kebutuhan teknis dan operasional.</p>
-      <p>Di RSU Bhakti Yudha, saya mengelola infrastruktur IT yang mendukung layanan klinis dan administratif sehari-hari, mulai dari troubleshooting hardware dan jaringan, hingga pemeliharaan sistem informasi rumah sakit (SIMRS).</p>
-      <p>Saya aktif mengembangkan diri melalui kursus dan sertifikasi, termasuk bidang AI, keamanan siber, dan healthcare IT, untuk terus relevan di era digitalisasi layanan kesehatan.</p>
-    </div>
-    <div class="about-highlights fade-in">
-      <div class="highlight-item">
-        <h4>Healthcare IT Environment</h4>
-        <p>Pengalaman mengelola sistem IT di lingkungan rumah sakit aktif dengan kebutuhan uptime tinggi.</p>
-      </div>
-      <div class="highlight-item">
-        <h4>Latar Belakang Multidisiplin</h4>
-        <p>Kombinasi keahlian Teknik Informatika dan pengalaman admin accounting untuk komunikasi efektif dengan manajemen.</p>
-      </div>
-      <div class="highlight-item">
-        <h4>Continuous Learning</h4>
-        <p>Aktif menyelesaikan kursus Google AI Essentials, IT Support, dan sertifikasi CompTIA di Coursera.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-header fade-in">
-    <span class="section-num">02</span>
-    <h2 class="section-title">Skill & Sertifikasi</h2>
-  </div>
-
-  <div class="skills-grid fade-in">
-    <div class="skill-group">
-      <div class="skill-group-icon">
-        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-      </div>
-      <h3>Hardware & OS</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Windows OS</span>
-        <span class="skill-tag">Troubleshooting</span>
-        <span class="skill-tag">PC Assembly</span>
-        <span class="skill-tag">Printer / Peripheral</span>
-        <span class="skill-tag">Active Directory</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-icon">
-        <svg viewBox="0 0 24 24"><path d="M6 9V2l-3 3 3 3"/><path d="M18 15v7l3-3-3-3"/><path d="M2 12h20M2 12c0 5.5 4.5 10 10 10s10-4.5 10-10S17.5 2 12 2 2 6.5 2 12z"/></svg>
-      </div>
-      <h3>Jaringan</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">TCP/IP</span>
-        <span class="skill-tag">LAN / WAN</span>
-        <span class="skill-tag">Mikrotik</span>
-        <span class="skill-tag">WiFi Troubleshooting</span>
-        <span class="skill-tag">VLAN</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
-      <h3>Healthcare IT</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">SIMRS</span>
-        <span class="skill-tag">BPJS Integration</span>
-        <span class="skill-tag">HL7/FHIR (dasar)</span>
-        <span class="skill-tag">PERMENKES</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      </div>
-      <h3>Soft Skills</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Komunikasi Teknis</span>
-        <span class="skill-tag">Problem Solving</span>
-        <span class="skill-tag">Manajemen Waktu</span>
-        <span class="skill-tag">Dokumentasi</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-icon">
-        <svg viewBox="0 0 24 24"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
-      </div>
-      <h3>Tools & Platform</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Google Workspace</span>
-        <span class="skill-tag">Microsoft 365</span>
-        <span class="skill-tag">TeamViewer</span>
-        <span class="skill-tag">NotebookLM</span>
-        <span class="skill-tag">Coursera</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-      </div>
-      <h3>AI & Produktivitas</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Google AI Essentials</span>
-        <span class="skill-tag">AI for Planning</span>
-        <span class="skill-tag">Prompt Engineering</span>
-        <span class="skill-tag">Generative AI</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- CERTS -->
-  <div class="certs-row fade-in">
-    <div class="cert-card">
-      <div class="cert-issuer">Google / Coursera</div>
-      <div class="cert-name">Google AI Essentials</div>
-      <div class="cert-year">2025</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-issuer">Google / Coursera</div>
-      <div class="cert-name">AI for Brainstorming & Planning</div>
-      <div class="cert-year">2025</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-issuer">CompTIA (Target)</div>
-      <div class="cert-name">CompTIA A+ · Network+</div>
-      <div class="cert-year">Roadmap 2025–2026</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-issuer">ITIL</div>
-      <div class="cert-name">ITIL Foundation</div>
-      <div class="cert-year">Roadmap 2026</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-issuer">Cisco</div>
-      <div class="cert-name">CCNA</div>
-      <div class="cert-year">Roadmap 2026</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-issuer">CompTIA</div>
-      <div class="cert-name">Security+</div>
-      <div class="cert-year">Roadmap 2026–2027</div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-header fade-in">
-    <span class="section-num">03</span>
-    <h2 class="section-title">Pengalaman Kerja</h2>
-  </div>
-  <div class="exp-timeline fade-in">
-
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-meta">
-        <span class="exp-company">RSU Bhakti Yudha</span>
-        <span class="exp-period">2023 – Sekarang</span>
-      </div>
-      <div class="exp-role">IT Support Specialist</div>
-      <div class="exp-desc">Bertanggung jawab atas operasional dan pemeliharaan infrastruktur IT rumah sakit, memastikan sistem berjalan optimal untuk mendukung pelayanan medis dan administratif.</div>
-      <ul class="exp-list">
-        <li>Troubleshooting hardware, software, dan jaringan untuk seluruh unit rumah sakit</li>
-        <li>Pemeliharaan dan monitoring SIMRS (Sistem Informasi Manajemen Rumah Sakit)</li>
-        <li>Pengelolaan jaringan LAN/WiFi dan perangkat Mikrotik</li>
-        <li>Koordinasi dengan vendor dan tim medis terkait kebutuhan IT</li>
-        <li>Mendukung integrasi sistem BPJS Kesehatan</li>
-      </ul>
-    </div>
-
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-meta">
-        <span class="exp-company">Pengalaman Sebelumnya</span>
-        <span class="exp-period">Sebelum 2023</span>
-      </div>
-      <div class="exp-role">Admin Accounting</div>
-      <div class="exp-desc">Pengalaman di bidang administrasi dan akuntansi yang membentuk kemampuan analitis, ketelitian, dan kemampuan komunikasi lintas departemen — kini menjadi keunggulan dalam peran IT Support.</div>
-      <ul class="exp-list">
-        <li>Pengelolaan data keuangan dan laporan administratif</li>
-        <li>Koordinasi lintas divisi untuk kebutuhan operasional</li>
-        <li>Penggunaan perangkat lunak spreadsheet dan sistem ERP dasar</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-header fade-in">
-    <span class="section-num">04</span>
-    <h2 class="section-title">Kontak</h2>
-  </div>
-  <div class="contact-grid">
-    <div class="fade-in">
-      <p class="contact-lead">Mari berkolaborasi dan <em>wujudkan</em> infrastruktur IT yang lebih baik.</p>
-      <p class="contact-sub">Saya terbuka untuk diskusi seputar IT Support, healthcare IT, maupun peluang kerja sama. Jangan ragu untuk menghubungi saya.</p>
-    </div>
-    <div class="contact-links fade-in">
-      <a href="mailto:dandyds@email.com" class="contact-link">
-        <div class="contact-link-icon">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div>
-          <div class="contact-link-label">Email</div>
-          <div class="contact-link-value">dandyds@email.com</div>
-        </div>
-      </a>
-      <a href="https://linkedin.com/in/dandyds" class="contact-link" target="_blank">
-        <div class="contact-link-icon">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        </div>
-        <div>
-          <div class="contact-link-label">LinkedIn</div>
-          <div class="contact-link-value">linkedin.com/in/dandyds</div>
-        </div>
-      </a>
-      <a href="#" class="contact-link">
-        <div class="contact-link-icon">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div>
-          <div class="contact-link-label">Lokasi</div>
-          <div class="contact-link-value">Depok, Jawa Barat</div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <p>© 2025 Dandy DS · IT Support Specialist · RSU Bhakti Yudha, Depok</p>
-</footer>
-
 <script>
-  const observer = new IntersectionObserver((entries) => {
+  function setActive(el) {
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Scroll spy
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('.nav-item');
+  const mobItems = document.querySelectorAll('.mob-nav-item');
+
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navItems.forEach(n => {
+          n.classList.toggle('active', n.getAttribute('href') === `#${id}`);
+        });
+        mobItems.forEach(n => {
+          n.classList.toggle('active', n.getAttribute('href') === `#${id}`);
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => spy.observe(s));
+
+  // Fade up observer
+  const fadeObs = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
         setTimeout(() => entry.target.classList.add('visible'), i * 80);
       }
     });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+
+  // Skill bar animation
+  const barObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          const w = bar.style.getPropertyValue('--w');
+          bar.style.width = (parseFloat(w) * 100) + '%';
+          bar.classList.add('animated');
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.skill-category').forEach(el => barObs.observe(el));
 </script>
 
 </body>
